@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<title>Générateur de Titres de Films/Séries</title>
+<style>
+body {
+    font-family: Arial, sans-serif;
+    background: #1e1e1e;
+    color: white;
+    padding: 20px;
+}
+.container {
+    max-width: 800px;
+    margin: auto;
+}
+label {
+    display: block;
+    margin-top: 10px;
+}
+input, select {
+    width: 100%;
+    padding: 6px;
+    margin-top: 4px;
+    border-radius: 4px;
+    border: none;
+}
+button {
+    margin-top: 15px;
+    padding: 10px;
+    width: 100%;
+    background: #0078d7;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+button:hover {
+    background: #005fa3;
+}
+.result {
+    margin-top: 20px;
+    padding: 10px;
+    background: #333;
+    border-radius: 4px;
+    word-break: break-all;
+}
+</style>
+</head>
+<body>
+
+<div class="container">
+<h2>Générateur de titre de film</h2>
+
+<label>Titre</label>
+<input type="text" id="titre">
+
+<label>Année</label>
+<input type="text" id="annee">
+
+<label>Info</label>
+<select id="info">
+    <option value="">--</option>
+	<option>REPACK</option>
+	<option>PROPER</option>
+	<option>CUSTOM</option>
+	<option>RERip</option>
+    <option>EXTENDED</option>
+    <option>DiRECTORS.CUT</option>
+	<option>FiNAL.CUT </option>
+	<option>THEATRiCAL</option>
+    <option>UNRATED</option>
+    <option>REMASTERED</option>
+	<option>ANNiVERSARY.EDITION</option>
+	<option>LiMiTED</option>
+	<option>RESTORED</option>
+</select>
+
+<label>Langue</label>
+<select id="langue">
+    <option value="">--</option>
+    <option>MULTi</option>
+	<option>FRENCH</option>
+    <option>VOSTFR</option>
+    <option>VOF</option>
+	<option>VOQ</option>
+	<option>SUBFRENCH</option>
+	<option>FANSUB.VOSTFR</option>
+</select>
+
+<label>Langue Info</label>
+<select id="langueinfo">
+    <option value="">--</option>
+    <option>VFF</option>
+	<option>TRUEFRENCH</option>
+    <option>VFQ</option>
+    <option>VFi</option>
+    <option>VF2</option>
+	<option>Muet</option>
+</select>
+
+<label>Dynamic</label>
+<select id="dynamic">
+	<option value="">--</option>
+    <option>HDR</option>
+    <option>HDR10+</option>
+	<option>SDR</option>
+</select>
+
+<label>Dolby Vision</label>
+<select id="dolby">
+	<option value="">--</option>
+    <option>DV</option>
+</select>
+
+<label>Résolution</label>
+<select id="resolution">
+	<option value="">--</option>
+	<option>SD</option>
+    <option>720p</option>
+    <option>1080p</option>
+    <option>2160p</option>
+</select>
+
+<label>Source</label>
+<select id="source">
+	<option value="">--</option>
+    <option>WEB-DL</option>
+    <option>WEBRip</option>
+	<option>DVDRip</option>
+    <option>BluRay</option>
+    <option>HDTV</option>
+	<option>REMUX</option>
+	<option>FULL</option>
+	<option>HDLight</option>
+	<option>4KLight</option>
+</select>
+
+<label>Codec Audio</label>
+<select id="codecaudio">
+	<option value="">--</option>
+    <option>E-AC3</option>
+	<option>DDP</option>
+    <option>AC3</option>
+    <option>AAC</option>
+    <option>HE-AAC</option>
+	<option>AC4</option>
+	<option>DTS</option>
+	<option>DTS-HD MA</option>
+	<option>TrueHD</option>
+</select>
+
+<label>Canaux</label>
+<select id="canaux">
+	<option value="">--</option>
+    <option>1.0</option>
+	<option>2.0</option>
+    <option>4.0</option>
+    <option>4.1</option>
+    <option>5.1</option>
+	<option>6.1</option>
+	<option>7.1</option>
+</select>
+
+<label>Atmos</label>
+<select id="atmos">
+	<option value="">--</option>
+    <option>Atmos</option>
+</select>
+
+<label>Codec Vidéo</label>
+<select id="codecvideo">
+	<option value="">--</option>
+    <option>x264</option>
+	<option>H264</option>
+	<option>AVC</option>
+    <option>x265</option>
+    <option>H265</option>
+    <option>HEVC</option>
+	<option>AV1</option>
+	<option>VC-1</option>
+	<option>x266</option>
+	<option>VCC</option>
+	<option>VP9</option>
+	<option>MPEG</option>
+</select>
+
+<label>Team</label>
+<input type="text" id="team">
+
+<label>Titre Original</label>
+<input type="text" id="titreOriginal">
+
+<button onclick="generer()">Générer</button>
+<button onclick="resetForm()">Réinitialiser</button>
+<button onclick="copier()">Copier le titre</button>
+
+<div class="result">
+<strong>Résultat :</strong>
+<div id="result"></div>
+</div>
+
+</div>
+
+<script>
+function clean(text) {
+
+    const motsLiaison = [
+        "de", "du", "des", "le", "la", "les",
+        "un", "une", "et", "a", "au", "aux",
+        "the", "of", "d"
+    ];
+
+    let result = text
+        .normalize("NFD")                    // Décompose accents
+        .replace(/[\u0300-\u036f]/g, "")     // Supprime accents
+        .replace(/[^a-zA-Z0-9]/g, " ")       // Caractères spéciaux → espace
+        .replace(/\s+/g, " ")                // Supprime espaces multiples
+        .trim()
+        .toLowerCase();
+
+    result = result.split(" ").map((mot, index) => {
+        if (index === 0) {
+            // Toujours majuscule au premier mot
+            return mot.charAt(0).toUpperCase() + mot.slice(1);
+        }
+        if (motsLiaison.includes(mot)) {
+            return mot; // mot de liaison reste en minuscule
+        }
+        return mot.charAt(0).toUpperCase() + mot.slice(1);
+    }).join(" ");
+
+    return result;
+}
+
+function generer() {
+    let titre = clean(document.getElementById("titre").value);
+    let annee = document.getElementById("annee").value;
+    let info = document.getElementById("info").value;
+    let langue = document.getElementById("langue").value;
+    let langueinfo = document.getElementById("langueinfo").value;
+	let dynamic = document.getElementById("dynamic").value;
+	let dolby = document.getElementById("dolby").value;
+    let resolution = document.getElementById("resolution").value;
+    let source = document.getElementById("source").value;
+    let codecaudio = document.getElementById("codecaudio").value;
+	let canaux = document.getElementById("canaux").value;
+	let atmos = document.getElementById("atmos").value;
+	let codecvideo = document.getElementById("codecvideo").value;
+    let team = document.getElementById("team").value;
+    let titreOriginal = clean(document.getElementById("titreOriginal").value);
+
+    let langues = [langue, langueinfo].filter(Boolean).join(" ");
+
+    let parts = [
+        titre,
+        annee ? `(${annee})` : "",
+        info,
+        langues,
+		dynamic,
+		dolby,
+        resolution,
+        source,
+        codecaudio,
+		canaux,
+		atmos,
+		codecvideo,
+    ].filter(Boolean);
+
+    let result = parts.join(" ");
+
+    if (team) result += "-" + team;
+    if (titreOriginal) result += " (" + titreOriginal + ")";
+
+    document.getElementById("result").innerText = result;
+}
+
+function resetForm() {
+    document.querySelectorAll("input").forEach(input => input.value = "");
+    document.querySelectorAll("select").forEach(select => select.selectedIndex = 0);
+    document.getElementById("result").innerText = "";
+}
+
+function copier() {
+    const text = document.getElementById("result").innerText;
+    if (!text) {
+        alert("Aucun titre à copier !");
+        return;
+    }
+    navigator.clipboard.writeText(text)
+        .then(() => alert("Titre copié dans le presse-papier !"))
+        .catch(err => alert("Impossible de copier : " + err));
+}
+
+</script>
+
+</body>
+</html>
