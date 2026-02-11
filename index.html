@@ -2,7 +2,7 @@
 <html lang="fr">
 <head>
 <meta charset="UTF-8">
-<title>Générateur de Titres de Films</title>
+<title>Générateur de Titres de Films/Séries</title>
 <style>
 body {
     font-family: Arial, sans-serif;
@@ -57,6 +57,9 @@ button:hover {
 
 <label>Année</label>
 <input type="text" id="annee">
+
+<label>Saison Episode</label>
+<input type="text" id="saisonepisode">
 
 <label>Info</label>
 <select id="info">
@@ -238,6 +241,7 @@ function clean(text) {
 function generer() {
     let titre = clean(document.getElementById("titre").value);
     let annee = document.getElementById("annee").value;
+	let saisonepisode = document.getElementById("saisonepisode").value;
     let info = document.getElementById("info").value;
     let langue = document.getElementById("langue").value;
     let langueinfo = document.getElementById("langueinfo").value;
@@ -257,6 +261,7 @@ function generer() {
     let parts = [
         titre,
         annee ? `(${annee})` : "",
+		saisonepisode,
         info,
         langues,
 		dynamic,
