@@ -118,6 +118,12 @@ h2 {
 	<option>RESTORED</option>
 </select>
 
+<label>IMAX</label>
+<select id="imax">
+	<option value="">--</option>
+    <option>IMAX</option>
+</select>
+
 <label>Langue</label>
 <select id="langue">
     <option value="">--</option>
@@ -162,6 +168,7 @@ h2 {
     <option>720p</option>
     <option>1080p</option>
     <option>2160p</option>
+	<option>4320p</option>
 </select>
 
 <label>Source</label>
@@ -172,10 +179,12 @@ h2 {
 	<option>DVDRip</option>
     <option>BluRay</option>
     <option>HDTV</option>
+	<option>TV</option>
 	<option>REMUX</option>
 	<option>FULL</option>
 	<option>HDLight</option>
 	<option>4KLight</option>
+	<option>VHS</option>
 </select>
 
 <label>Codec Audio</label>
@@ -191,6 +200,8 @@ h2 {
 	<option>DTS-HD MA</option>
 	<option>TrueHD</option>
 	<option>PCM</option>
+	<option>FLAC</option>
+	<option>OPUS</option>
 </select>
 
 <label>Canaux</label>
@@ -281,6 +292,7 @@ function generer() {
     let annee = document.getElementById("annee").value;
 	let saisonepisode = document.getElementById("saisonepisode").value;
     let info = document.getElementById("info").value;
+	let imax = document.getElementById("imax").value;
     let langue = document.getElementById("langue").value;
     let langueinfo = document.getElementById("langueinfo").value;
 	let dynamic = document.getElementById("dynamic").value;
@@ -301,6 +313,7 @@ function generer() {
         annee ? `(${annee})` : "",
 		saisonepisode,
         info,
+		imax,
         langues,
 		dynamic,
 		dolby,
