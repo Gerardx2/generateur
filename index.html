@@ -9,36 +9,48 @@ body {
     font-family: Arial, sans-serif;
     background: #1e1e1e;
     color: white;
+    margin: 0;
     padding: 20px;
 }
+
 .container {
-    max-width: 800px;
+    max-width: 700px;
     margin: auto;
+    padding: 10px;
 }
+
 label {
     display: block;
     margin-top: 10px;
+    font-weight: bold;
 }
+
+/* ----- DESKTOP ----- */
 input, select {
-    width: 100%;
+    width: 60%;
     padding: 6px;
     margin-top: 4px;
     border-radius: 4px;
     border: none;
+    font-size: 14px;
 }
+
 button {
     margin-top: 15px;
-    padding: 10px;
-    width: 100%;
+    padding: 8px;
+    width: 60%;
     background: #0078d7;
     color: white;
     border: none;
     border-radius: 4px;
     cursor: pointer;
+    font-size: 14px;
 }
+
 button:hover {
     background: #005fa3;
 }
+
 .result {
     margin-top: 20px;
     padding: 10px;
@@ -46,41 +58,32 @@ button:hover {
     border-radius: 4px;
     word-break: break-all;
 }
-body {
-    margin: 0;
-}
-
-.container {
-    max-width: 800px;
-    margin: auto;
-    padding: 10px;
-}
-
-input, select, button {
-    font-size: 16px; /* empêche le zoom auto iPhone */
-}
 
 h2 {
     text-align: center;
 }
 
-/* Ajustements mobile */
+/* ----- MOBILE ----- */
 @media (max-width: 600px) {
 
     body {
         padding: 10px;
     }
 
+    input, select {
+        width: 100%;
+        padding: 12px;
+        font-size: 16px; /* évite zoom iPhone */
+    }
+
     button {
+        width: 100%;
         padding: 14px;
         font-size: 16px;
     }
-
-    input, select {
-        padding: 10px;
-    }
 }
 </style>
+
 </head>
 <body>
 
