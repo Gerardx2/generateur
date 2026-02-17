@@ -99,14 +99,20 @@ h2 {
 <label>Saison Episode</label>
 <input type="text" id="saisonepisode">
 
-<label>Info</label>
+<label>Info (facultatif)</label>
 <select id="info">
     <option value="">--</option>
 	<option>REPACK</option>
 	<option>PROPER</option>
 	<option>CUSTOM</option>
 	<option>RERip</option>
-    <option>EXTENDED</option>
+    
+</select>
+
+<label>Edition (facultatif)</label>
+<select id="edition">
+    <option value="">--</option>
+	<option>EXTENDED</option>
     <option>DiRECTORS.CUT</option>
 	<option>FiNAL.CUT </option>
 	<option>THEATRiCAL</option>
@@ -118,7 +124,7 @@ h2 {
 	<option>RESTORED</option>
 </select>
 
-<label>IMAX</label>
+<label>IMAX (facultatif)</label>
 <select id="imax">
 	<option value="">--</option>
     <option>IMAX</option>
@@ -136,7 +142,7 @@ h2 {
 	<option>FANSUB.VOSTFR</option>
 </select>
 
-<label>Langue Info</label>
+<label>Langue Info (facultatif)</label>
 <select id="langueinfo">
     <option value="">--</option>
     <option>VFF</option>
@@ -147,7 +153,7 @@ h2 {
 	<option>Muet</option>
 </select>
 
-<label>Dynamic</label>
+<label>Dynamic (facultatif)</label>
 <select id="dynamic">
 	<option value="">--</option>
     <option>HDR</option>
@@ -155,7 +161,7 @@ h2 {
 	<option>SDR</option>
 </select>
 
-<label>Dolby Vision</label>
+<label>Dolby Vision (facultatif)</label>
 <select id="dolby">
 	<option value="">--</option>
     <option>DV</option>
@@ -169,6 +175,50 @@ h2 {
     <option>1080p</option>
     <option>2160p</option>
 	<option>4320p</option>
+</select>
+
+<label>Plateforme (facultatif)</label>
+<select id="plateforme">
+	<option value="">--</option>
+	<option>ADN</option>
+    <option>AMZN</option>
+    <option>ARTE</option>
+    <option>ATVP</option>
+	<option>BCORE</option>
+	<option>CR</option>
+	<option>CRAVE</option>
+	<option>DSNP</option>
+	<option>HMAX</option>
+	<option>MAX</option>
+	<option>HULU</option>
+	<option>iT</option>
+	<option>MA</option>
+	<option>MUBI</option>
+	<option>NF</option>
+	<option>PCOK</option>
+	<option>PMTP</option>
+	<option>STAN</option>
+	<option>STARZ</option>
+</select>
+
+<label>Région (facultatif)</label>
+<select id="region">
+	<option value="">--</option>
+	<option>FRA</option>
+    <option>EUR</option>
+    <option>USA</option>
+    <option>GRB</option>
+	<option>CAN</option>
+	<option>JPN</option>
+	<option>KOR</option>
+	<option>HKG</option>
+	<option>GER</option>
+	<option>ITA</option>
+	<option>SPA</option>
+	<option>NLD</option>
+	<option>RUS</option>
+	<option>CZE</option>
+	<option>CHN</option>
 </select>
 
 <label>Source</label>
@@ -204,7 +254,7 @@ h2 {
 	<option>OPUS</option>
 </select>
 
-<label>Canaux</label>
+<label>Canaux (facultatif)</label>
 <select id="canaux">
 	<option value="">--</option>
     <option>1.0</option>
@@ -216,7 +266,7 @@ h2 {
 	<option>7.1</option>
 </select>
 
-<label>Atmos</label>
+<label>Atmos (facultatif)</label>
 <select id="atmos">
 	<option value="">--</option>
     <option>Atmos</option>
@@ -292,12 +342,15 @@ function generer() {
     let annee = document.getElementById("annee").value;
 	let saisonepisode = document.getElementById("saisonepisode").value;
     let info = document.getElementById("info").value;
+	let edition = document.getElementById("edition").value;
 	let imax = document.getElementById("imax").value;
     let langue = document.getElementById("langue").value;
     let langueinfo = document.getElementById("langueinfo").value;
 	let dynamic = document.getElementById("dynamic").value;
 	let dolby = document.getElementById("dolby").value;
     let resolution = document.getElementById("resolution").value;
+	let plateforme = document.getElementById("plateforme").value;
+	let region = document.getElementById("region").value;
     let source = document.getElementById("source").value;
     let codecaudio = document.getElementById("codecaudio").value;
 	let canaux = document.getElementById("canaux").value;
@@ -313,11 +366,14 @@ function generer() {
         annee ? `(${annee})` : "",
 		saisonepisode,
         info,
+		edition,
 		imax,
         langues,
 		dynamic,
 		dolby,
         resolution,
+		plateforme,
+		region,
         source,
         codecaudio,
 		canaux,
